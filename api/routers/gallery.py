@@ -6,7 +6,7 @@ import paramiko
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
-from api import schemas, database
+from api import schemas, database, oauth2
 from api.repository import gallery
 
 router = APIRouter(
@@ -20,7 +20,8 @@ SERVER_PATH = "public_html/dev.test.bonitohairspot.com"
 
 
 @router.get('/active', response_model=List[schemas.Gallery])
-def get_all_active_images(db: Session = Depends(get_db)):
+def get_all_active_images(db: Session = Depends(get_db),
+                          current_user: schemas.User = Depends(oauth2.get_current_user)):
     return gallery.get_active_images(db)
 
 
