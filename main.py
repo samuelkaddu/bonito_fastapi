@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.routers import gallery, user, auth, service
+from api.routers import gallery, user, auth, service, upload
 
 app = FastAPI()
 
@@ -25,3 +25,4 @@ app.include_router(gallery.router)
 app.include_router(user.router)
 app.include_router(auth.router)
 app.include_router(service.router)
+app.include_router(upload.router)

@@ -1,8 +1,3 @@
-import json
-import os
-from typing import List
-
-import paramiko
 from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 

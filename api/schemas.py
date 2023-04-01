@@ -5,9 +5,9 @@ from pydantic.types import date
 class Gallery(BaseModel):
     id: int = None
     public_id: str = None
-    src: str
-    status: str
-    section: str
+    src: str = None
+    status: str = None
+    section: str = None
     created_by: str = None
     create_date: date = None
     modified_by: str = None

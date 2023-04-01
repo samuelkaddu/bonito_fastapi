@@ -4,6 +4,8 @@ from typing import List
 
 import paramiko
 from fastapi import APIRouter, Depends, status
+from fastapi.responses import JSONResponse
+
 from sqlalchemy.orm import Session
 
 from api import schemas, database, oauth2
@@ -36,27 +38,37 @@ def get_pending_images(db: Session = Depends(get_db)):
     return response
 
 
-@router.get('/{public_id}', status_code=status.HTTP_200_OK)
-def get_image_by_id(public_id: str, db: Session = Depends(get_db)):
-    response = gallery.image_by_id(public_id, db)
-    return response
-
-
 @router.post('/', status_code=status.HTTP_201_CREATED)
 def create_image(request: schemas.Gallery, db: Session = Depends(get_db)):
-    return gallery.create(request, db)
+    try:
+        gallery.create(request, db)
+        response = JSONResponse({"code": "0", "message": "Success"})
+        return response
+    except Exception as e:
+        response = JSONResponse({"code": "99", "message": "Operation failed"})
+        return response
 
 
 @router.put('/{public_id}', status_code=status.HTTP_202_ACCEPTED)
 def update_image(request: schemas.Gallery, db: Session = Depends(get_db)):
-    response = gallery.update(request, db)
-    return {'message': response}
+    try:
+        gallery.update(request, db)
+        response = JSONResponse({"code": "0", "message": "Success"})
+        return response
+    except Exception as e:
+        response = JSONResponse({"code": "99", "message": "Operation failed"})
+        return response
 
 
 @router.put('/approve', status_code=status.HTTP_200_OK)
 def approve_image(request: schemas.Gallery, db: Session = Depends(get_db)):
-    response = gallery.approve_image(request, db)
-    return response
+    try:
+        gallery.approve_image(request, db)
+        response = JSONResponse({"code": "0", "message": "Success"})
+        return response
+    except Exception as e:
+        response = JSONResponse({"code": "99", "message": "Operation failed"})
+        return response
 
 
 @router.put('/approve/all/{modified_by}', status_code=status.HTTP_200_OK)
@@ -65,7 +77,7 @@ def approve_all_pending_images(modified_by: str, db: Session = Depends(get_db)):
     return response
 
 
-@router.put('/sync', status_code=status.HTTP_200_OK)
+@router.get('/sync', status_code=status.HTTP_200_OK)
 def sync_with_offline_gallery(db: Session = Depends(get_db)):
     images = gallery.get_active_images(db)
     output = []
@@ -97,3 +109,9 @@ def sync_with_offline_gallery(db: Session = Depends(get_db)):
 def delete_image(public_id: str, db: Session = Depends(get_db)):
     response = gallery.delete(public_id, db)
     return {response}
+
+
+@router.get('/{public_id}', status_code=status.HTTP_200_OK)
+def get_image_by_id(public_id: str, db: Session = Depends(get_db)):
+    response = gallery.image_by_id(public_id, db)
+    return response
