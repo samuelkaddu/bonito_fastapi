@@ -11,7 +11,7 @@ origins = [
     "http://localhost:9001",
     "https://bonitohairspot.com",
     "https://dev.test.bonitohairspot.com",
-    "https://portal.admin.bonitohairspot.com/",
+    "https://portal.admin.bonitohairspot.com",
 ]
 
 app.add_middleware(
