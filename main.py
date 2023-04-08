@@ -8,7 +8,9 @@ app = FastAPI()
 # Define allowed origins
 origins = [
     "http://localhost",
-    "http://localhost:9000",
+    "http://localhost:9001",
+    "https://bonitohairspot.com",
+    "https://dev.test.bonitohairspot.com",
 ]
 
 app.add_middleware(

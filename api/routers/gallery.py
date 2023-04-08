@@ -22,8 +22,7 @@ SERVER_PATH = "public_html/dev.test.bonitohairspot.com"
 
 
 @router.get('/active', response_model=List[schemas.Gallery])
-def get_all_active_images(db: Session = Depends(get_db),
-                          current_user: schemas.User = Depends(oauth2.get_current_user)):
+def get_all_active_images(db: Session = Depends(get_db)):
     return gallery.get_active_images(db)
 
 

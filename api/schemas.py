@@ -20,17 +20,17 @@ class Gallery(BaseModel):
 class User(BaseModel):
     id: int = None
     public_id: str = None
-    username: str
-    password: str
+    username: str = None
+    password: str = None
     isAdmin: bool = False
-    status: str
-    email: str
-    firstname: str
-    lastname: str
+    status: str = None
+    email: str = None
+    firstname: str = None
+    lastname: str = None
     isApprover: bool = False
     isReceiveMail: bool = False
-    role: int
-    resetPassword: str
+    role: int = None
+    resetPassword: bool = False
     created_by: str = None
     create_date: str = None
     modified_by: str = None
