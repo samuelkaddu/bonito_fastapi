@@ -70,7 +70,7 @@ def image_by_id(public_id: str, db: Session):
 def get_pending_images(db: Session):
     images = db.query(models.Gallery).filter_by(status='Submitted').all()
     if not images:
-        raise HTTPException(status_code=404, detail="Image not found")
+        return []
     return images
 
 
