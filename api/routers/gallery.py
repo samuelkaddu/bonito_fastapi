@@ -101,7 +101,8 @@ def sync_with_offline_gallery(db: Session = Depends(get_db)):
     os.remove('gallery.json')
     sftp.close()
     ssh.close()
-    return {"status": "Synchronized successfully"}
+    response = JSONResponse({"code": "0", "message": "Success"})
+    return response
 
 
 @router.delete('/{public_id}', status_code=status.HTTP_200_OK)
