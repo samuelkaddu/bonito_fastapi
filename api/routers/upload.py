@@ -1,18 +1,16 @@
 import datetime
 import os
 import shutil
-import tempfile
 import uuid
 from typing import List
 
 import paramiko
 from fastapi import APIRouter, Depends, status, Request, UploadFile, File
 from fastapi.responses import JSONResponse
-
 from sqlalchemy.orm import Session
 from werkzeug.utils import secure_filename
 
-from api import oauth2, schemas, database, models
+from api import database, models
 
 router = APIRouter(
     prefix="/upload",
@@ -20,7 +18,8 @@ router = APIRouter(
 )
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-SERVER_PATH = "public_html/dev.test.bonitohairspot.com"
+# SERVER_PATH = "public_html/dev.test.bonitohairspot.com"
+SERVER_PATH = "public_html"
 
 get_db = database.get_db
 
