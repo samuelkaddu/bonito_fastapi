@@ -9,6 +9,7 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:9001",
+    "http://localhost:9000",
     "https://bonitohairspot.com",
     "https://dev.test.bonitohairspot.com",
     "https://portal.admin.bonitohairspot.com",
