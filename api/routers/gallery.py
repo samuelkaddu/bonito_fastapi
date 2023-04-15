@@ -18,7 +18,8 @@ router = APIRouter(
 
 get_db = database.get_db
 
-SERVER_PATH = "public_html/dev.test.bonitohairspot.com"
+# SERVER_PATH = "public_html/dev.test.bonitohairspot.com"
+SERVER_PATH = "public_html"
 
 
 @router.get('/active', response_model=List[schemas.Gallery])
